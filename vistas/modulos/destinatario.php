@@ -1,0 +1,185 @@
+<div class="container-fluid mw-100">
+  <div class="card w-100 position-relative overflow-hidden">
+    <div class="card-body p-4">
+      <div class="container-fluid">
+        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
+          <div class="card-body px-4 py-3">
+            <div class="row align-items-center">
+              <div class="col-9">
+                <h4 class="fw-semibold mb-8">Destinatario</h4>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-muted" href="./index.html">Menu</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Destinatario</li>
+                  </ol>
+                </nav>
+              </div>
+              <div class="col-3">
+                <div class="text-center mb-n5">
+                  <img src="../../dist/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buscador y botón agregar -->
+        <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+          <div class="col-md-8 col-xl-9 d-flex align-items-center">
+            <a href="javascript:void(0)" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
+              <i class="ti ti-building-store text-white me-1 fs-5"></i> Agregar Destinatario
+            </a>
+            <a href="javascript:void(0)" id="btn-reportes-destinatario" class="btn btn-secondary d-flex align-items-center ms-2">
+              <i class="ti ti-file text-white me-1 fs-5"></i> Generar Reporte
+            </a>
+          </div>
+        </div>
+        <br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header d-flex align-items-center">
+                <h5 class="modal-title"> <i class="ti ti-building-store text-blue me-1 fs-5"></i> Nuevo Destinatario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="add-contact-box">
+                  <div class="add-contact-content">
+                    <form method="post" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <input type="text" name="nuevoCedula" class="form-control" placeholder="Ingrese cedula de identidad" required />
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="nuevoNombre" class="form-control" placeholder="Ingrese nombre completo" required />
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="nuevoDireccion" class="form-control" placeholder="Ingrese direccion" required />
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="nuevoTelefono" class="form-control" placeholder="Telefono" required />
+                      </div>
+                      <button type="submit" class="btn btn-success">Agregar</button>
+                      <?php
+                      $crearDestinatario = new ControladorDestinatarios();
+                      $crearDestinatario->ctrCrearDestinatario();
+                      ?>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Editar-->
+        <div class="modal fade" id="editContactModal" tabindex="-1" role="dialog" aria-labelledby="editContactModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header d-flex align-items-center">
+                <h5 class="modal-title"> <i class="ti ti-user text-blue me-1 fs-5"></i> Editar Destinatario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="edit-contact-box">
+                  <div class="edit-contact-content">
+                    <form method="post" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <input type="text" name="editarCedula" id="editarCedula" class="form-control" placeholder="Ingrese cedula de identidad" required />
+                        <input type="hidden" name="idDestinatario" id="idDestinatario" required>
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="editarNombre" id="editarNombre" class="form-control" placeholder="Ingrese nombre completo" required />
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="editarDireccion" id="editarDireccion" class="form-control" placeholder="Ingrese direccion" required />
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" name="editarTelefono" id="editarTelefono" class="form-control" placeholder="Telefono" required />
+                      </div>
+                      <button type="submit" class="btn btn-success">Guardar</button>
+                      <?php
+                      $editarDestinatario = new ControladorDestinatarios();
+                      $editarDestinatario->ctrEditarDestinatario();
+                      ?>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-content searchable-container list">
+          <div class="card card-body">
+            <div class="table-responsive">
+              <table id="tablaDestinatarios" class="display responsive nowrap tablas" style="width:100%">
+                <thead class="header-item">
+                  <tr>
+                    <th>id</th>
+                    <th>Cedula de identidad</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $item = null;
+                  $valor = null;
+                  $destinatarios = ControladorDestinatarios::ctrMostrarDestinatarios($item, $valor);
+                  $contador = 1; // Inicializa un contador para los IDs fuera del bucle
+                  foreach ($destinatarios as $key => $value) {
+                    echo '<tr class="search-items">';
+                    // Celda para el ID
+                    echo '<td>
+                      <div class="d-flex align-items-center">
+                        <h6>' . $contador . '</h6>
+                      </div>
+                    </td>';
+                    // Celda para la cedula de identidad
+                    echo '<td>
+                      <div class="ms-3">
+                        <div class="user-meta-info">
+                          <h6 class="user-name mb-0">' . $value["cedula"] . '</h6>
+                        </div>
+                      </div>
+                    </td>';
+                    // Celda para el nombre
+                    echo '<td>
+                      <span class="usr-location">' . $value["nombre"] . '</span>
+                    </td>';
+                    // Celda para la dirección
+                    echo '<td>
+                      <span class="usr-ph-no">' . $value["direccion"] . '</span>
+                    </td>';
+                    // Celda para el teléfono
+                    echo '<td>' . $value["telefono"] . '</td>';
+                    // Celda para las acciones
+                    echo '<td>
+                      <div class="action-btn">
+                        <a href="" class="btnEditarDestinatario ms-4" idDestinatario="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editContactModal">
+                          <i class="ti ti-eye fs-5"></i>
+                        </a>
+                      </div>
+                    </td>';
+                    // Incrementa el contador por cada usuario
+                    $contador++;
+                    echo '</tr>';
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php
+  $borrarUsuario = new ControladorDestinatarios();
+  $borrarUsuario->ctrBorrarDestinatario();
+  ?>
+</div>

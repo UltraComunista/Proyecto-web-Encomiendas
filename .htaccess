@@ -1,0 +1,8 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /Proyecto-web-Encomiendas/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([-a-zA-Z0-9]+)/?$ index.php?ruta=$1 [QSA,L]

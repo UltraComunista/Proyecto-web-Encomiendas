@@ -1,0 +1,18 @@
+{
+    "name": "rodrigo/proyecto-web-encomiendas",
+    "autoload": {
+        "psr-4": {
+            "Rodrigo\\ProyectoWebEncomiendas\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rodrigo",
+            "email": "echeverriarodrigo686@gmail.com"
+        }
+    ],
+    "require": {
+        "twilio/sdk": "^8.2",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

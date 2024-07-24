@@ -146,17 +146,31 @@
 
         <div class="widget-content searchable-container list">
           <div class="card card-body">
-            <div class="table-responsive">
-              <table id="example" class="display responsive nowrap tablas" style="width:100%">
-                <thead class="header-item">
+            <div class="table-responsive rounded-2 mb-4">
+            <table class="table border text-nowrap customize-table mb-0 align-middle tablas">
+                <thead class="text-dark fs-4">
                   <tr>
-                    <th>id</th>
-                    <th>Sucursal</th>
-                    <th>Departamento</th>
-                    <th>Provincia</th>
-                    <th>Estado</th>
-                    <th>Numero Telefonico</th>
-                    <th>Acciones</th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">id</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Sucursal</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Departamento</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Provincia</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Estado</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Numero Telefonico</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Acciones</h6>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -172,14 +186,28 @@
                     echo '<td><span class="usr-location" data-location="' . $value["departamento"] . '">' . $value["departamento"] . '</span></td>';
                     echo '<td><span class="usr-location" data-location="' . $value["provincia"] . '">' . $value["provincia"] . '</span></td>';
                     if ($value["estado"] != 0) {
-                      echo '<td><button class="btn btn-success btnActivar" id="' . $value["id"] . '" estadoSucursal="0">Activado</button></td>';
+                      echo '<td><span class="badge bg-light-success text-success fw-semibold fs-2 gap-1 d-inline-flex align-items-center"><i class="ti ti-circle fs-3"></i>Activado</span></td>';
                     } else {
-                      echo '<td><button class="btn btn-danger btnActivar" id="' . $value["id"] . '" estadoSucursal="1">Desactivado</button></td>';
+                      echo '<td><span class="badge bg-light-danger text-danger fw-semibold fs-2 gap-1 d-inline-flex align-items-center"><i class="ti ti-circle fs-3"></i>Desactivado</span></td>';
                     }
-                    echo '<td>' . $value["telefono"] . '</td>';
-                    echo '<td><div class="action-btn ms-4"><a href="" class="btnEditarSucursal" idSucursal="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editarsucursal"><i class="ti ti-eye fs-5"></i></a></div></td>';
-                    $contador++;
+                    echo '<td><p class="mb-0 fw-normal">' . $value["telefono"] . '</p></td>';
+                    echo '<td>';
+                    echo '    <div class="dropdown dropstart">';
+                    echo '        <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">';
+                    echo '            <i class="ti ti-dots fs-5"></i>';
+                    echo '        </a>';
+                    echo '        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+                    echo '            <li>';
+                    echo '                <a class="dropdown-item d-flex align-items-center gap-3 btnEditarSucursal" idSucursal="' . $value["id"] . '" href="#" data-bs-toggle="modal" data-bs-target="#editarsucursal"><i class="fs-4 ti ti-edit"></i>Editar</a>';
+                    echo '            </li>';
+                    echo '            <li>';
+                    echo '                <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Eliminar</a>';
+                    echo '            </li>';
+                    echo '        </ul>';
+                    echo '    </div>';
+                    echo '</td>';
                     echo '</tr>';
+                    $contador++;
                   }
                   ?>
                 </tbody>
@@ -187,6 +215,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

@@ -15,7 +15,13 @@ class ControladorUsuarios
                 $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
 
                 if ($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $_POST["ingPassword"]) {
+                    // Actualizar estado a "en línea"
+                    ModeloUsuarios::mdlActualizarEstadoUsuario($respuesta["id"], 1);
+
                     $_SESSION["iniciarSesion"] = "ok";
+                    $_SESSION["id"] = $respuesta["id"];
+                    $_SESSION["usuario"] = $respuesta["usuario"];
+
                     echo '<script> window.location = "inicio" </script>';
                 } else {
                     echo '<br>
@@ -173,6 +179,16 @@ class ControladorUsuarios
                     });
                     </script>";
             }
+        }
+    }
+    static public function ctrLogoutUsuario()
+    {
+        if (isset($_SESSION["id"])) {
+            // Actualizar estado a "offline"
+            ModeloUsuarios::mdlActualizarEstadoUsuario($_SESSION["id"], 0);
+
+            session_destroy();
+            echo '<script> window.location = "login" </script>';
         }
     }
 }

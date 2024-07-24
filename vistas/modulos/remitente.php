@@ -113,59 +113,82 @@
 
         <div class="widget-content searchable-container list">
           <div class="card card-body">
-            <div class="table-responsive">
-              <table id="tablaRemitentes" class="display responsive nowrap tablas" style="width:100%">
-                <thead class="header-item">
+            <div class="table-responsive rounded-2 mb-4">
+              <table class="table border text-nowrap customize-table mb-0 align-middle tablas">
+                <thead class="text-dark fs-4">
                   <tr>
-                    <th>id</th>
-                    <th>Cedula de identidad</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    <th>Acciones</th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">id</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Cedula de identidad</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Nombre</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Direccion</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Telefono</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Acciones</h6>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $item = null;
                   $valor = null;
-                  $usuarios = ControladorRemitente::ctrMostrarRemitente($item, $valor);
+                  $destinatarios = ControladorRemitente::ctrMostrarRemitente($item, $valor);
                   $contador = 1; // Inicializa un contador para los IDs fuera del bucle
-                  foreach ($usuarios as $key => $value) {
-                    echo '<tr>';
+                  foreach ($destinatarios as $key => $value) {
+                    echo '<tr class="search-items">';
                     // Celda para el ID
                     echo '<td>
-                      <div class="d-flex align-items-center">
-                        <h6>' . $contador . '</h6>
-                      </div>
-                    </td>';
+              <div class="d-flex align-items-center">
+                <h6>' . $contador . '</h6>
+              </div>
+            </td>';
                     // Celda para la cedula de identidad
                     echo '<td>
-                      <div class="ms-3">
-                        <div class="user-meta-info">
-                          <h6 class="user-name mb-0">' . $value["cedula"] . '</h6>
-                        </div>
-                      </div>
-                    </td>';
+              <div class="ms-3">
+                <div class="user-meta-info">
+                  <h6 class="user-name mb-0">' . $value["cedula"] . '</h6>
+                </div>
+              </div>
+            </td>';
                     // Celda para el nombre
                     echo '<td>
-                      <span class="usr-location">' . $value["nombre"] . '</span>
-                    </td>';
+              <span class="usr-location">' . $value["nombre"] . '</span>
+            </td>';
                     // Celda para la dirección
                     echo '<td>
-                      <span class="usr-ph-no">' . $value["direccion"] . '</span>
-                    </td>';
+              <span class="usr-ph-no">' . $value["direccion"] . '</span>
+            </td>';
                     // Celda para el teléfono
                     echo '<td>' . $value["telefono"] . '</td>';
                     // Celda para las acciones
                     echo '<td>
-                      <div class="action-btn">
-                        <a href="javascript:void(0)" class="btnEditarRemitente ms-4" idRemitente="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editContactModal">
-                          <i class="ti ti-eye fs-5"></i>
-                        </a>
-
-                      </div>
-                    </td>';
+              <div class="dropdown dropstart">
+                <a href="#" class="text-muted" id="dropdownMenuButton' . $value["id"] . '" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ti ti-dots fs-5"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $value["id"] . '">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3 btnEditarDestinatario" idDestinatario="' . $value["id"] . '" href="#" data-bs-toggle="modal" data-bs-target="#editContactModal">
+                      <i class="fs-4 ti ti-edit"></i>Editar
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3 btnEliminarDestinatario" idDestinatario="' . $value["id"] . '" href="#">
+                      <i class="fs-4 ti ti-trash"></i>Eliminar
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>';
                     // Incrementa el contador por cada usuario
                     $contador++;
                     echo '</tr>';

@@ -27,7 +27,7 @@
         <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
           <div class="col-md-8 col-xl-9 d-flex align-items-center">
             <a href="javascript:void(0)" id="btn-add-contact" class="btn btn-info d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#agregarusuario">
-              <i class="ti ti-plus text-white me-1 fs-5"></i>  Agregar Usuario
+              <i class="ti ti-plus text-white me-1 fs-5"></i> Agregar Usuario
             </a>
             <a href="javascript:void(0)" id="btn-reportes" class="btn btn-secondary d-flex align-items-center ms-2">
               <i class="ti ti-file text-white me-1 fs-5"></i> Generar Reporte
@@ -143,18 +143,37 @@
 
         <div class="widget-content searchable-container list">
           <div class="card card-body">
-            <div class="table-responsive">
-              <table id="tablaUsuarios" class="display responsive nowrap tablas" style="width:100%">
-                <thead class="header-item">
+            <div class="table-responsive rounded-2 mb-4">
+              <table class="table border text-nowrap customize-table mb-0 align-middle tablas">
+                <thead class="text-dark fs-4">
                   <tr>
-                    <th>id</th>
-                    <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Cedula identidad</th>
-                    <th>Usuario</th>
-                    <th>Perfil</th>
-                    <th>Última vez</th>
-                    <th>Acciones</th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">ID</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Foto</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Nombre</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Cédula identidad</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Usuario</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Perfil</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Estado</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Última vez</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Acciones</h6>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -165,19 +184,41 @@
                   $contador = 1;
                   foreach ($usuarios as $key => $value) {
                     $foto = !empty($value["foto"]) ? $value["foto"] : './img/predeterminado/images.png';
+                    $estado = $value["estado"] ? '<span class="badge bg-light-success text-success fw-semibold fs-2 gap-1 d-inline-flex align-items-center"><i class="ti ti-circle fs-3"></i>active</span>' : '<span class="badge bg-light text-dark fw-semibold fs-2 gap-1 d-inline-flex align-items-center"><i class="ti ti-clock-hour-4 fs-3"></i>offline</span>';
                     echo '<tr>';
                     echo '<td><div class="d-flex align-items-center"><h6>' . $contador . '</h6></div></td>';
-                    echo '<td><div class="ms-3"><div class="user-meta-info"><img src="' . $foto . '" alt="Foto de ' . $value["nombre"] . ' ' . $value["apellido"] . '" class="img-fluid rounded-circle" width="50"></div></div></td>';
-                    echo '<td><div class="ms-3"><div class="user-meta-info"><h6 class="user-name mb-0" data-name="' . $value["nombre"] . ' ' . $value["apellido"] . '">' . $value["nombre"] . ' ' . $value["apellido"] . '</h6></div></div></td>';
-                    echo '<td>' . $value["cedula"] . '</td>';
-                    echo '<td><span class="usr-location" data-location="' . $value["usuario"] . '">' . $value["usuario"] . '</span></td>';
-                    echo '<td><span class="usr-location" data-location="' . $value["perfil"] . '">' . $value["perfil"] . '</span></td>';
-                    echo '<td>' . $value["ultimologin"] . '</td>';
                     echo '<td>';
-                    echo '    <div class="action-btn ms-4">';
-                    echo '        <a href="" class="btnEditarUsuario" idUsuario="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editarusuario"><i class="ti ti-pencil fs-5"></i></a>';
-                    echo '        <a href="" class="btnImprimir" idUsuario="' . $value["id"] . '"><i class="ti ti-printer fs-5"></i></a>';
-                    echo '    </div>';
+                    echo '<div class="d-flex align-items-center">';
+                    echo '<img src="' . $foto . '" class="rounded-circle" width="40" height="40" />';
+                    echo '</div>';
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<div class="d-flex align-items-center">';
+                    echo '<div class="ms-3">';
+                    echo '<h6 class="fs-4 fw-semibold mb-0">' . $value["nombre"] . ' ' . $value["apellido"] . '</h6>';
+                    echo '<span class="fw-normal">@' . $value["usuario"] . '</span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</td>';
+                    echo '<td><p class="mb-0 fw-normal">' . $value["cedula"] . '</p></td>';
+                    echo '<td><p class="mb-0 fw-normal">' . $value["usuario"] . '</p></td>';
+                    echo '<td><p class="mb-0 fw-normal">' . $value["perfil"] . '</p></td>';
+                    echo '<td>' . $estado . '</td>';
+                    echo '<td><p class="mb-0 fw-normal">' . $value["ultimologin"] . '</p></td>';
+                    echo '<td>';
+                    echo '<div class="dropdown dropstart">';
+                    echo '<a href="#" class="text-muted" id="dropdownMenuButton' . $contador . '" data-bs-toggle="dropdown" aria-expanded="false">';
+                    echo '<i class="ti ti-dots fs-5"></i>';
+                    echo '</a>';
+                    echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $contador . '">';
+                    echo '<li>';
+                    echo '<a class="dropdown-item d-flex align-items-center gap-3 btnEditarUsuario" idUsuario="' . $value["id"] . '" href="#" data-bs-toggle="modal" data-bs-target="#editarusuario"><i class="fs-4 ti ti-pencil"></i>Edit</a>';
+                    echo '</li>';
+                    echo '<li>';
+                    echo '<a class="dropdown-item d-flex align-items-center gap-3 btnImprimir" idUsuario="' . $value["id"] . '" href="#"><i class="fs-4 ti ti-printer"></i>Print</a>';
+                    echo '</li>';
+                    echo '</ul>';
+                    echo '</div>';
                     echo '</td>';
                     echo '</tr>';
                     $contador++;
@@ -188,6 +229,8 @@
             </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>

@@ -33,20 +33,40 @@
         <br>
         <div class="widget-content searchable-container list">
           <div class="card card-body">
-            <div class="table-responsive">
-              <table id="example" class="display responsive nowrap tablas" style="width:100%">
-                <thead class="header-item">
+            <div class="table-responsive rounded-2 mb-4">
+              <table class="table border text-nowrap customize-table mb-0 align-middle tablas">
+                <thead class="text-dark fs-4">
                   <tr>
-                    <th>id</th>
-                    <th>Numero Reg.</th>
-                    <th>Enviador</th>
-                    <th>Destinatario</th>
-                    <th>Lugar Destino</th>
-                    <th>Precio</th>
-                    <th>Descripcion</th>
-                    <th>Estado Pago</th>
-                    <th>Estado Envio</th>
-                    <th>Acciones</th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">id</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Numero Reg.</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Enviador</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Destinatario</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Lugar Destino</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Precio</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Descripcion</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Estado Pago</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Estado Envio</h6>
+                    </th>
+                    <th>
+                      <h6 class="fs-4 fw-semibold mb-0">Acciones</h6>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,7 +84,25 @@
                     echo  '<td>' . $value["descripcion"] . '</td>';
                     echo '<td>' . ($value["EstadoPago"] == 'Pagado' ? '<span class="badge bg-success">Pagado</span>' : '<span class="badge bg-danger">Debe</span>') . '</td>';
                     echo '<td>' . ($value["estadoPaquete"] == 'Entregado' ? '<span class="badge bg-success">Entregado</span>' : '<span class="badge bg-danger">Pendiente</span>') . '</td>';
-                    echo '<td><div class="action-btn ms-4"><a href="" class="btnEditarUsuario" idUsuario="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editContactModal"><i class="ti ti-refresh fs-5"></i></a></div></td>';
+                    echo '<td>
+              <div class="dropdown dropstart">
+                <a href="#" class="text-muted" id="dropdownMenuButton' . $value["id"] . '" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ti ti-dots fs-5"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton' . $value["id"] . '">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3 btnEditarUsuario" idUsuario="' . $value["id"] . '" href="#" data-bs-toggle="modal" data-bs-target="#editContactModal">
+                      <i class="fs-4 ti ti-edit"></i>Editar
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3 btnEliminarUsuario" idUsuario="' . $value["id"] . '" href="#">
+                      <i class="fs-4 ti ti-trash"></i>Eliminar
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>';
                     $contador++;
                     echo '</tr>';
                   }

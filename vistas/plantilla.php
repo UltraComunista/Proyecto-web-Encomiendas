@@ -24,7 +24,7 @@ session_start();
   <!-- --------------------------------------------------- -->
   <!-- Prism Js -->
   <!-- --------------------------------------------------- -->
-  <link rel="stylesheet" href="vistas/dist/libs/prismjs/themes/prism-okaidia.min.css">
+  <link rel="stylesheet" href="vistas/dist/libs/owl.carousel/dist/assets/owl.carousel.min.css">
 
 
   <link rel="stylesheet" href="vistas/dist/libs/sweetalert2/dist/sweetalert2.min.css">
@@ -37,27 +37,6 @@ session_start();
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 
-  <style>
-    .tablas th {
-      background-color: #549AFC;
-      /* Color azul */
-      color: white;
-      /* Color del texto */      
-    }
-
-    .dataTables_wrapper .dataTables_info,
-    .dataTables_wrapper .dataTables_paginate,
-    .dataTables_wrapper .dataTables_length,
-    .dataTables_wrapper .dataTables_filter {
-      background-color: transparent !important;
-    }
-
-    table.dataTable tbody td.sorting_1,
-    table.dataTable tbody td.sorting_2,
-    table.dataTable tbody td.sorting_3 {
-      background-color: transparent !important;
-    }
-  </style>
 
   <!-- Core Css -->
   <link id="themeColors" rel="stylesheet" href="vistas/dist/css/style.min.css" />
@@ -102,7 +81,8 @@ session_start();
         $_GET["ruta"] == "destinatario" ||
         $_GET["ruta"] == "sucursal" ||
         $_GET["ruta"] == "prueba" ||
-        $_GET["ruta"] == "usuarios"
+        $_GET["ruta"] == "usuarios"  ||
+        $_GET["ruta"] == "logout"
       ) {
 
         include "modulos/" . $_GET["ruta"] . ".php";
@@ -139,11 +119,13 @@ session_start();
   <script src="vistas//dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!--  core files -->
   <script src="vistas/dist/js/app.min.js"></script>
-  <script src="vistas/dist/js/app.init.js"></script>
   <script src="vistas/dist/js/app-style-switcher.js"></script>
-  <script src="vistas/dist/js/sidebarmenu.js"></script>
   <script src="vistas/dist/js/custom.js"></script>
   <script src="vistas/dist/libs/prismjs/prism.js"></script>
+  <script src="vistas/dist/js/app.minisidebar.init.js"></script>
+  <script src="vistas/dist/js/sidebarmenu.js"></script>
+    
+  <script src="vistas/dist/js/custom.js"></script>
 
   <!--  current page js files -->
   <script src="vistas/dist/libs/moment-js/build/moment.min.js"></script>
@@ -173,3 +155,4 @@ session_start();
 </body>
 
 </html>
+

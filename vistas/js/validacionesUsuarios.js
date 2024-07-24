@@ -18,14 +18,6 @@ $(document).ready(function () {
         }
     });
 
-    // Validar cédula para que solo contenga números
-    $("input[name='nuevoCedula'], input[name='editarCedula']").on("input", function () {
-        var valor = $(this).val();
-        if (/[^0-9]/.test(valor)) {
-            toastr.error('La cédula solo puede contener números.', 'Error');
-            $(this).val(valor.replace(/[^0-9]/g, ''));
-        }
-    });
 
     // Validar usuario existente
     $("input[name='nuevoUsuario'], input[name='editarUsuario']").on("input", function () {
@@ -51,53 +43,4 @@ $(document).ready(function () {
         });
     });
 
-    // Validar antes de enviar el formulario de creación de usuario
-    $("#addContactModalTitle").on("submit", function (e) {
-        var nombre = $("input[name='nuevoNombre']").val();
-        var apellido = $("input[name='nuevoApellido']").val();
-        var cedula = $("input[name='nuevoCedula']").val();
-
-        if (nombre === "" || /[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/.test(nombre)) {
-            toastr.error('El nombre no puede estar vacío ni contener caracteres especiales.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-
-        if (apellido === "" || /[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/.test(apellido)) {
-            toastr.error('El apellido no puede contener caracteres especiales.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-
-        if (cedula === "" || /[^0-9]/.test(cedula)) {
-            toastr.error('La cédula solo puede contener números.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    // Validar antes de enviar el formulario de edición de usuario
-    $("#editContactModalTitle").on("submit", function (e) {
-        var nombre = $("input[name='editarNombre']").val();
-        var apellido = $("input[name='editarApellido']").val();
-        var cedula = $("input[name='editarCedula']").val();
-
-        if (nombre === "" || /[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/.test(nombre)) {
-            toastr.error('El nombre no puede estar vacío ni contener caracteres especiales.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-
-        if (apellido === "" || /[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/.test(apellido)) {
-            toastr.error('El apellido no puede contener caracteres especiales.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-
-        if (cedula === "" || /[^0-9]/.test(cedula)) {
-            toastr.error('La cédula solo puede contener números.', 'Error');
-            e.preventDefault();
-            return false;
-        }
-    });
 });

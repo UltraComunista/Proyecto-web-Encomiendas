@@ -96,10 +96,11 @@
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item d-flex align-items-center gap-3 btnEliminarUsuario" idUsuario="' . $value["id"] . '" href="#">
-                      <i class="fs-4 ti ti-trash"></i>Eliminar
-                    </a>
+                  <a class="dropdown-item d-flex align-items-center gap-3 btnImprimirNotaVenta" idVenta="' . $value["id"] . '" href="#"><i class="fs-4 ti ti-printer"></i>Print Nota de Venta</a>
+                  </a>
                   </li>
+                  <li>
+                  <a class="dropdown-item d-flex align-items-center gap-3 btnImprimirEnvio" idEnvio="' . $value["id"] . '" href="#"><i class="fs-4 ti ti-printer"></i>Print Envío</a>                  </li>
                 </ul>
               </div>
             </td>';

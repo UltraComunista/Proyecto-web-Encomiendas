@@ -1,4 +1,18 @@
 $(document).ready(function () {
+    // Manejar la generación de reporte de Nota de Venta
+    $(document).on("click", ".btnImprimirNotaVenta", function () {
+        var idVenta = $(this).attr("idVenta");
+        window.open("extensiones/tcpdf/pdf/reporteNotaVenta.php?idVenta=" + idVenta, "_blank");
+    });
+
+     // Manejar la generación de reporte de Envío
+     $(document).on("click", ".btnImprimirEnvio", function () {
+        var idEnvio = $(this).attr("idEnvio");
+        window.open("extensiones/tcpdf/pdf/reporteEnvio.php?idEnvio=" + idEnvio, "_blank");
+    });
+});
+
+$(document).ready(function () {
     $('input[name="cedula_enviador"]').on('blur', function () {
         var cedula = $(this).val();
         if (cedula) {
@@ -194,7 +208,9 @@ $(document).ready(function () {
             }
         }
     });
+
 });
+
 
 
 

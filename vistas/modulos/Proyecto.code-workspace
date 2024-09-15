@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Xd/ajax"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501
+	}
+}
